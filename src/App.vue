@@ -1,8 +1,10 @@
 <template>
-  <nav v-if="user">
+<div class="app-container">
+  <nav v-if="user !== null">
     <router-link to="/">Home</router-link> |
   </nav>
   <router-view/>
+</div>
 </template>
 
 <script>
