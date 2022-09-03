@@ -1,11 +1,11 @@
 <template>
- <main>
+ <section class='block-content-box'>
     <div class="card m-3">
-      <h4 class="card-header">Login</h4>
+      <h4 class="card-header">Register</h4>
       <div class="card-body">
-        <form @submit.prevent="signIn">
+        <form @submit.prevent="signUp">
           <div class="form-group">
-            <label for="email"> email
+            <label for="email">
             <input
               class="form-control"
               type="email"
@@ -16,7 +16,7 @@
             </label>
           </div>
           <div class="form-group">
-            <label for="password">password
+            <label for="password">
             <input
               class="form-control"
               :type="hidePassword"
@@ -26,18 +26,22 @@
               id="password" />
             </label>
           </div>
-        <button class="btn btn-primary" type="submit">Login</button>
-        <p>Did you have an account?
-          <PersonalRouter :route="route" :buttonText="buttonText" />
-        </p>
-        <a href="#">FORGOT PASSWORD?</a>
-          <p>No account?
-            <router-link to="register" class="btn btn-link">Register</router-link>
-          </p>
+          <div class="form-group">
+            <label for="passwordCheck">
+            <input
+              class="form-control"
+              :type="hidePassword"
+              v-model="passwordCheck"
+              required
+              placeholder="**********"
+              id="password" />
+            </label>
+          </div>
+        <button type="submit">create account</button>
         </form>
       </div>
     </div>
-  </main>
+  </section>
 </template>
 
 <script>
@@ -48,6 +52,7 @@ export default {
     return {
       email: '', // Input Fields
       password: '', // Input Fields
+      passwordCheck: '', // check if the pass double validation
       errorMessage: '', // Error Message
       hidePassword: true, // trigger password visibility
     };
@@ -58,15 +63,17 @@ export default {
     },
   },
   methods: {
-    async signIn() { // function to Signin user to supaBase
-      try {
-        await defineStore().signIn(this.email, this.password);
-        this.$router.push({ path: '/' });
-      } catch (error) {
-        this.errorMessage = `${error.message}`;
-        setTimeout(() => { // hides error message
-          this.errorMessage = null;
-        }, 5000);
+    async signUp() { // function to SignUp user to supaBase
+      if (this.password === this.passwordCheck) {
+        try {
+          await defineStore().signUp(this.email, this.password);
+          this.$router.push({ path: '/auth/login' });
+        } catch (error) {
+          this.errorMessage = `${error.message}`;
+          setTimeout(() => { // hides error message
+            this.errorMessage = null;
+          }, 5000);
+        }
       }
     },
   },

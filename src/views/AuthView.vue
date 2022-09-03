@@ -1,42 +1,5 @@
 <template>
-  <h1>Sign page</h1>
-  <!--<button @click="handleSignUp">get in</button> -->
-  <signIn />
+  <router-view></router-view>
 </template>
 
-<script>
-
-import { mapState, mapActions } from 'pinia'; // import pinia methods
-import userStore from '@/store/modules/user'; // import userData from pinia store
-import signIn from '@/components/signIn.vue';
-
-export default {
-  name: 'AuthView',
-  components: {
-    signIn,
-  },
-  computed: {
-    ...mapState(userStore, ['user']),
-  },
-  methods: {
-    ...mapActions(userStore, ['signUp']),
-    handleSignUp() {
-      const userData = {
-        email: 'antonio.ferraz.coutinho@gmail.com',
-        password: '123456',
-      };
-      this.signUp(userData.email, userData.password);
-    },
-  },
-  watch: {
-    user() {
-      if (this.user) {
-        console.log(this.user);
-        this.$router.push({ path: '/' });
-      } else {
-        console.error('no user found');
-      }
-    },
-  },
-};
-</script>
+<script></script>

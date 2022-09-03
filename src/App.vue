@@ -1,7 +1,8 @@
 <template>
-<div class="app-container">
+<div class="container-sm">
   <nav v-if="user !== null">
     <router-link to="/">Home</router-link> |
+    <router-link to="signOut">Sign out</router-link>
   </nav>
   <router-view/>
 </div>
@@ -24,7 +25,7 @@ export default {
     try {
       await this.fetchUser(); // look for user in database
       if (!this.user) { // if user is not present in database route to log in page
-        this.$router.push({ path: '/auth' });
+        this.$router.push({ path: '/auth/login' });
       } else { // if user exists route to home
         this.$router.push({ path: '/' });
       }
@@ -36,12 +37,14 @@ export default {
 </script>
 
 <style>
+@import '@/assets/base.css';
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background: #96b5d479;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items:center
 }
 
 nav {

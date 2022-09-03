@@ -1,7 +1,5 @@
 .app-container {
     min-height: 350px;
-    max-width: 500px;
-    background-color: rgb(0, 0, 0);
 }
 
 .btn-delete-user {

@@ -7,11 +7,61 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
   }),
   actions: {
     async fetchTasks() { // fetch tasks by ID descending order
-      const { data: tasks } = await supabase // get data from supabase
+      const { data: tasks } = await supabase // get all tasks from supabase
         .from('tasks') // database name
         .select('*') // get all
         .order('id', { ascending: false }); // ID descending order
       this.tasks = tasks; // save tasks on state parameter
+    },
+
+    async addTask(title) {
+      // console.log(defineStore().user.id);
+      const { data: tasks, error } = await supabase
+        .from('tasks').insert([
+          {
+            user_id: defineStore().user.id,
+            title,
+            is_complete: false,
+          },
+        ]);
+      this.tasks = tasks;
+      if (error) {
+        console.log(error.message);
+      }
+    },
+
+    async editTask(title, id) {
+      const { data: tasks, error } = await supabase.from('tasks').update({
+        title,
+      }).match({
+        id,
+      });
+      this.tasks = tasks;
+      if (error) {
+        console.log(error.message);
+      }
+    },
+
+    async deleteTask(id) {
+      const { data: tasks, error } = await supabase.from('tasks').delete().match({
+        id,
+      });
+      this.tasks = tasks;
+      if (error) {
+        console.log(error.message);
+      }
+    },
+
+    async toggleTask(isComplete, id) {
+      const { data: tasks, error } = await supabase.from('tasks').update({
+        isComplete,
+      }).match({
+        id,
+      });
+      this.tasks = tasks;
+      if (error) {
+        console.log(error.message);
+      }
     },
   },
 });
