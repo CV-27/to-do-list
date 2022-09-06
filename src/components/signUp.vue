@@ -2,10 +2,10 @@
  <section class='block-content-box'>
     <div class="card m-3">
       <h4 class="card-header">Register</h4>
-      <div class="card-body">
+      <div class="card-body d-flex align-items-md-center">
         <form @submit.prevent="signUp">
-          <div class="form-group">
-            <label for="email">
+          <div class="form-group d-flex align-items-md-center">
+            <label for="email" >
             <input
               class="form-control"
               type="email"

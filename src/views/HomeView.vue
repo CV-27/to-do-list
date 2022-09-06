@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-  <h1>Home View</h1>
+  <div class="block-content-box">
+  <taskList />
   </div>
 </template>
 
@@ -8,9 +8,13 @@
 
 import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/modules/task';
+import taskList from '@/components/tasksList.vue';
 
 export default {
   name: 'HomeView',
+  components: {
+    taskList,
+  },
   computed: {
     ...mapState(taskStore, ['tasks']),
   },

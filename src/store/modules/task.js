@@ -15,7 +15,6 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
     },
 
     async addTask(title) {
-      // console.log(defineStore().user.id);
       const { data: tasks, error } = await supabase
         .from('tasks').insert([
           {

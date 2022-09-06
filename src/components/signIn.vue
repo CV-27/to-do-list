@@ -1,43 +1,55 @@
 <template>
- <main>
-    <div class="card m-3">
+ <section class='container-sm justify-content-center'>
+    <div class="card shadow-lg m-auto">
       <h4 class="card-header">Login</h4>
       <div class="card-body">
         <form @submit.prevent="signIn">
           <div class="form-group">
-            <label for="email"> email
-            <input
-              class="form-control"
-              type="email"
-              placeholder="email@domain.com"
-              id="email"
-              v-model="email"
-              required />
+            <label for="email">
+            <div class="input-group flex-nowrap">
+              <input
+                class="form-control"
+                type="email"
+                placeholder="mail@domain.com"
+                id="email"
+                v-model="email"
+                required />
+              <span class="input-group-text px-4" id="basic-addon1">@</span>
+            </div>
             </label>
           </div>
-          <div class="form-group">
-            <label for="password">password
-            <input
-              class="form-control"
-              :type="hidePassword"
-              v-model="password"
-              required
-              placeholder="**********"
-              id="password" />
-            </label>
+          <div class="form-group py-2">
+            <label for="password">
+            <div class="input-group flex-nowrap">
+              <input
+                class="form-control"
+                :type="inputType"
+                v-model="password"
+                required
+                placeholder="password"
+                id="password" />
+                <button
+                  @click="showPassword"
+                  class="btn btn-outline-secondary"
+                  type="button" id="button-addon2"> {{ btnText }}
+                </button>
+              </div>
+              </label>
           </div>
-        <button class="btn btn-primary" type="submit">Login</button>
-        <p>Did you have an account?
+        <button class="btn btn-primary my-2" type="submit">Login</button>
+        <router-link to="register" class="btn btn-info mx-2">Register</router-link>
+        <a href="#">Forgot your password? bad luck</a>
+        <!-- <p>Did you have an account?
           <PersonalRouter :route="route" :buttonText="buttonText" />
         </p>
-        <a href="#">FORGOT PASSWORD?</a>
+        <a href="#">Forgot your password? bad luck</a>
           <p>No account?
             <router-link to="register" class="btn btn-link">Register</router-link>
-          </p>
+          </p> -->
         </form>
       </div>
     </div>
-  </main>
+  </section>
 </template>
 
 <script>
@@ -49,16 +61,21 @@ export default {
       email: '', // Input Fields
       password: '', // Input Fields
       errorMessage: '', // Error Message
-      hidePassword: true, // trigger password visibility
+      inputType: 'password', // trigger password visibility
+      btnText: 'Show',
     };
   },
-  computed: {
-    passwordFieldType() {
-      return this.hidePassword ? 'password' : 'text';
-    },
-  },
   methods: {
-    async signIn() { // function to Signin user to supaBase
+    showPassword() {
+      if (this.inputType === 'password') {
+        this.inputType = 'text';
+        this.btnText = 'Hide';
+      } else {
+        this.inputType = 'password';
+        this.btnText = 'Show';
+      }
+    },
+    async signIn() { // use supabase to send a valid user to the home page
       try {
         await defineStore().signIn(this.email, this.password);
         this.$router.push({ path: '/' });

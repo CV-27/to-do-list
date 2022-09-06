@@ -1,8 +1,8 @@
 <template>
-<div class="container-sm">
+<div class="block-content-box crossed" >
   <nav v-if="user !== null">
     <router-link to="/">Home</router-link> |
-    <router-link to="signOut">Sign out</router-link>
+    <router-link to="signOut">Sign Out</router-link>
   </nav>
   <router-view/>
 </div>
@@ -35,28 +35,3 @@ export default {
   },
 };
 </script>
-
-<style>
-@import '@/assets/base.css';
-
-#app {
-  background: #96b5d479;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  align-items:center
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
