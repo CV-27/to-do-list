@@ -14,11 +14,12 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       this.tasks = tasks; // save tasks on state parameter
     },
 
-    async addTask(title) {
+    async addTask(title, id) {
+      console.log(title);
       const { data: tasks, error } = await supabase
         .from('tasks').insert([
           {
-            user_id: defineStore().user.id,
+            user_id: id,
             title,
             is_complete: false,
           },

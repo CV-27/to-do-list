@@ -1,6 +1,7 @@
 <template>
   <div class="block-content-box">
-  <taskList />
+    <task-list />
+    <input-field />
   </div>
 </template>
 
@@ -9,17 +10,19 @@
 import { mapState, mapActions } from 'pinia';
 import taskStore from '@/store/modules/task';
 import taskList from '@/components/tasksList.vue';
+import inputField from '@/components/inputField.vue';
 
 export default {
   name: 'HomeView',
   components: {
     taskList,
+    inputField,
   },
   computed: {
     ...mapState(taskStore, ['tasks']),
   },
   methods: {
-    ...mapActions(taskStore, ['fetchTasks']),
+    ...mapActions(taskStore, ['fetchTasks', 'addTask']),
   },
   created() {
     this.fetchTasks();
