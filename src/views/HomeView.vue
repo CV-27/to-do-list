@@ -22,10 +22,10 @@ export default {
     ...mapState(taskStore, ['tasks']),
   },
   methods: {
-    ...mapActions(taskStore, ['fetchTasks', 'addTask']),
+    ...mapActions(taskStore, ['fetchTasks']),
   },
-  created() {
-    this.fetchTasks();
-  },
+  // mounted() {
+  //   this.fetchTasks(this.tasks);
+  // },
 };
 </script>

@@ -2,7 +2,7 @@
  <section>
     <div class="card m-3">
       <div class="card-body">
-        <label for="task">
+        <label for="task" class="input-group d-flex">
           <div class="input-group">
             <input
             v-model="newTitle"
@@ -13,7 +13,7 @@
             aria-describedby="button-addon2"
             required>
             <button
-            @click.prevent="addNewTask"
+            @click="addNewTask"
             class="btn btn-outline-secondary"
             type="button"
             id="button-addon2">Add Task
@@ -51,7 +51,7 @@ export default {
     ]),
     addNewTask() {
       this.addTask(this.newTitle, this.user.id);
-      this.tasks.push(this.newTitle);
+      this.tasks.push({ title: this.newTitle, id: this.user.id });
       this.newTitle = '';
     },
   },

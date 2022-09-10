@@ -3,22 +3,31 @@
     <div class="card m-3">
       <h4 class="card-header">Tasks</h4>
       <div class="card-body">
-      <!-- <ul class="list-group">
-        <li
-        class="list-group-item list-group-item-action"
-        v-for="task in tasks"
-        :key="task">
-        {{ task.title }}
-        </li>
-      </ul> -->
-      <label for="task">
-        <input
-        class="form-control m-2"
-        v-for="task in tasks"
-        :key="task"
-        type="text"
-        :value="task.title"
-        disabled readonly>
+      <label for="task" class="input-group d-flex">
+        <div class="input-group m-1" v-for="task in tasks" :key="task">
+          <input
+          class="form-control"
+          type="text"
+          :value="task.title"
+          disabled readonly>
+          <button
+          class="btn btn-success"
+          type="button"
+          aria-describedby="button-addon3">
+          Done
+          </button>
+          <button
+          class="btn btn-dark"
+          type="button">
+          Edit
+          </button>
+          <button
+          @click.prevent="useDeleteTask"
+          class="btn btn-danger"
+          type="button">
+          Delete
+          </button>
+        </div>
       </label>
       </div>
     </div>
@@ -29,13 +38,16 @@
 
 import { mapActions, mapState } from 'pinia';
 import useTasksStore from '@/store/modules/task';
-import inputField from '@/components/inputField.vue';
+import userStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
+    ...mapState(userStore, [
+      'user',
+    ]),
   },
   methods: {
     ...mapActions(useTasksStore, [
@@ -43,10 +55,12 @@ export default {
       'deleteTask',
       'addTask',
     ]),
-    ...mapActions(inputField, [
-      'addNewTask',
-    ]),
+    useDeleteTask() {
+      this.deleteTask(this.id);
+    },
+  },
+  mounted() {
+    this.fetchTasks(this.tasks);
   },
 };
-
 </script>

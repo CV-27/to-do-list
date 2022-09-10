@@ -10,12 +10,12 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       const { data: tasks } = await supabase // get all tasks from supabase
         .from('tasks') // database name
         .select('*') // get all
-        .order('id', { ascending: false }); // ID descending order
-      this.tasks = tasks; // save tasks on state parameter
+        .order('id', { ascending: true }); // ID descending order
+      this.tasks = tasks;
+      return this.tasks; // save tasks on state parameter
     },
 
     async addTask(title, id) {
-      console.log(title);
       const { data: tasks, error } = await supabase
         .from('tasks').insert([
           {
