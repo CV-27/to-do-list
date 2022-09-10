@@ -1,7 +1,7 @@
 <template>
   <div class="block-content-box">
     <task-list />
-    <input-field />
+    <input-field @addTask="addNewTask"/>
   </div>
 </template>
 
@@ -22,10 +22,7 @@ export default {
     ...mapState(taskStore, ['tasks']),
   },
   methods: {
-    ...mapActions(taskStore, ['fetchTasks']),
+    ...mapActions(taskStore, ['fetchTasks', 'addTask']),
   },
-  // mounted() {
-  //   this.fetchTasks(this.tasks);
-  // },
 };
 </script>

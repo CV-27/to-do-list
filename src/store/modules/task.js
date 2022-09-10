@@ -11,8 +11,8 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
         .from('tasks') // database name
         .select('*') // get all
         .order('id', { ascending: true }); // ID descending order
-      this.tasks = tasks;
-      return this.tasks; // save tasks on state parameter
+      this.tasks = tasks;// save tasks on state parameter
+      return tasks;
     },
 
     async addTask(title, id) {

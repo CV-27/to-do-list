@@ -1,20 +1,22 @@
 <template>
-<div class="block-content-box crossed" >
-  <nav v-if="user !== null">
-    <router-link to="/">Home</router-link> |
-    <router-link to="signOut">Sign Out</router-link>
-  </nav>
+<div class="crossed" >
+  <nav-bar v-if="user !== null"/>
   <router-view/>
 </div>
 </template>
 
 <script>
 
+import navBar from '@/components/navBar.vue';
 import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/modules/user';
 
 export default {
+  components: { navBar },
   name: 'App',
+  component: {
+    navBar,
+  },
   computed: {
     ...mapState(userStore, ['user']), // states from Pinia are computed
   },

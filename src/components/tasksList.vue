@@ -4,7 +4,7 @@
       <h4 class="card-header">Tasks</h4>
       <div class="card-body">
       <label for="task" class="input-group d-flex">
-        <div class="input-group m-1" v-for="task in tasks" :key="task">
+        <div class="input-group m-1" :taskId="task.id" v-for="task in tasks" :key="task.id">
           <input
           class="form-control"
           type="text"
@@ -42,6 +42,11 @@ import userStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
+  data() {
+    return {
+      taskId: null,
+    };
+  },
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
@@ -53,10 +58,9 @@ export default {
     ...mapActions(useTasksStore, [
       'fetchTasks',
       'deleteTask',
-      'addTask',
     ]),
     useDeleteTask() {
-      this.deleteTask(this.id);
+      this.deleteTask(this.taskId);
     },
   },
   mounted() {

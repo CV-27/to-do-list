@@ -5,36 +5,36 @@
       <div class="card-body">
         <form @submit.prevent="signIn">
           <div class="form-group">
-            <label for="email">
+            <label for="email" class="d-flex">
             <div class="input-group flex-nowrap">
               <input
-                class="form-control"
-                type="email"
-                placeholder="mail@domain.com"
-                id="email"
-                v-model="email"
-                required />
+              class="form-control"
+              type="email"
+              placeholder="mail@domain.com"
+              id="email"
+              v-model="email"
+              required />
               <span class="input-group-text px-4" id="basic-addon1">@</span>
             </div>
             </label>
           </div>
           <div class="form-group py-2">
-            <label for="password">
+            <label for="password" class="d-flex">
             <div class="input-group flex-nowrap">
               <input
-                class="form-control"
-                :type="inputType"
-                v-model="password"
-                required
-                placeholder="password"
-                id="password" />
-                <button
-                  @click="showPassword"
-                  class="btn btn-outline-secondary"
-                  type="button" id="button-addon2"> {{ btnText }}
-                </button>
-              </div>
-              </label>
+              class="form-control"
+              :type="inputType"
+              v-model="password"
+              required
+              placeholder="password"
+              id="password" />
+              <button
+              @click="showPassword"
+              class="btn btn-outline-secondary"
+              type="button" id="button-addon2"> {{ btnText }}
+              </button>
+            </div>
+            </label>
           </div>
         <button class="btn btn-primary my-2" type="submit">Login</button>
         <router-link to="register" class="btn btn-info mx-2">Register</router-link>
