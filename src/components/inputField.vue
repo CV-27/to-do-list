@@ -39,8 +39,6 @@ export default {
     };
   },
   computed: {
-    ...mapState(useTasksStore, [
-      'tasks']),
     ...mapState(userStore, [
       'user',
     ]),
@@ -50,8 +48,7 @@ export default {
       'addTask',
     ]),
     addNewTask() {
-      this.addTask(this.newTitle, this.user.id);
-      this.tasks.push({ title: this.newTitle, id: this.user.id });
+      this.addTask(this.newTitle);
       this.newTitle = '';
     },
   },

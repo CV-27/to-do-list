@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import supabase from '@/supabase/index';
+import useUserStore from './user';
 
 export default defineStore('tasks', { // sync tasks from pinia and supabase
   state: () => ({
@@ -15,18 +16,20 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       return tasks;
     },
 
-    async addTask(title, id) {
+    async addTask(title) {
+      const userStore = useUserStore();
       const { data: tasks, error } = await supabase
         .from('tasks').insert([
           {
-            user_id: id,
+            user_id: userStore.user.id,
             title,
-            is_complete: false,
           },
         ]);
-      this.tasks = tasks;
       if (error) {
         console.log(error.message);
+      }
+      if (tasks.length) {
+        this.tasks.push(tasks[0]);
       }
     },
 
@@ -46,10 +49,10 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       const { data: tasks, error } = await supabase.from('tasks').delete().match({
         id,
       });
-      this.tasks = tasks;
       if (error) {
         console.log(error.message);
       }
+      console.log(tasks);
     },
 
     async toggleTask(isComplete, id) {

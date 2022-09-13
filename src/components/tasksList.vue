@@ -4,7 +4,7 @@
       <h4 class="card-header">Tasks</h4>
       <div class="card-body">
       <label for="task" class="input-group d-flex">
-        <div class="input-group m-1" :taskId="task.id" v-for="task in tasks" :key="task.id">
+        <div class="input-group m-1" v-for="task in tasks" :key="task.id">
           <input
           class="form-control"
           type="text"
@@ -22,7 +22,7 @@
           Edit
           </button>
           <button
-          @click.prevent="useDeleteTask"
+          @click.prevent="useDeleteTask(task.id)"
           class="btn btn-danger"
           type="button">
           Delete
@@ -42,11 +42,6 @@ import userStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
-  data() {
-    return {
-      taskId: null,
-    };
-  },
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
@@ -59,8 +54,8 @@ export default {
       'fetchTasks',
       'deleteTask',
     ]),
-    useDeleteTask() {
-      this.deleteTask(this.taskId);
+    useDeleteTask(param) {
+      this.deleteTask(param);
     },
   },
   mounted() {
