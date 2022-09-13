@@ -46,13 +46,14 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
     },
 
     async deleteTask(id) {
-      const { data: tasks, error } = await supabase.from('tasks').delete().match({
+      const { error } = await supabase.from('tasks').delete().match({
         id,
       });
       if (error) {
         console.log(error.message);
       }
-      console.log(tasks);
+      const taskIndex = this.tasks.indexOf();
+      this.tasks.splice(taskIndex, 1);
     },
 
     async toggleTask(isComplete, id) {
