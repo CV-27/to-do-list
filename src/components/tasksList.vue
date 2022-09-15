@@ -54,8 +54,8 @@ export default {
       'fetchTasks',
       'deleteTask',
     ]),
-    useDeleteTask(param) {
-      this.deleteTask(param);
+    useDeleteTask(id) {
+      this.deleteTask(id);
     },
   },
   mounted() {

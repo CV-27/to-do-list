@@ -52,7 +52,7 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       if (error) {
         console.log(error.message);
       }
-      const taskIndex = this.tasks.indexOf();
+      const taskIndex = id;
       this.tasks.splice(taskIndex, 1);
     },
 
