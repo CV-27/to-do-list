@@ -1,17 +1,22 @@
 <template>
-  <nav v-if="user">
-    <router-link to="/">Home</router-link> |
-  </nav>
+<div class="crossed" >
+  <nav-bar v-if="user !== null"/>
   <router-view/>
+</div>
 </template>
 
 <script>
 
+import navBar from '@/components/navBar.vue';
 import { mapState, mapActions } from 'pinia';
 import userStore from '@/store/modules/user';
 
 export default {
+  components: { navBar },
   name: 'App',
+  component: {
+    navBar,
+  },
   computed: {
     ...mapState(userStore, ['user']), // states from Pinia are computed
   },
@@ -22,7 +27,7 @@ export default {
     try {
       await this.fetchUser(); // look for user in database
       if (!this.user) { // if user is not present in database route to log in page
-        this.$router.push({ path: '/auth' });
+        this.$router.push({ path: '/auth/login' });
       } else { // if user exists route to home
         this.$router.push({ path: '/' });
       }
@@ -32,26 +37,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>

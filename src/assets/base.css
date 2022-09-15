@@ -1,0 +1,25 @@
+#app {
+    background-image: 
+        -webkit-gradient(linear, right bottom, left top, 
+        color-stop(0, #96b5d479), 
+        color-stop(0.25, #96b5d479), 
+        color-stop(0.25, #313a4279), 
+        color-stop(0.5, #313a4279), 
+        color-stop(0.5, #96b5d479), 
+        color-stop(0.75, #96b5d479),
+        color-stop(0.75, #313a4279));
+    background-size: 5px 5px;
+    height: 100vh;
+  }
+
+.block-content-box {
+    padding: 40px 0;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.btn-delete-user {
+    width: 40px;
+    text-align: center;
+    box-sizing: content-box;
+}
