@@ -4,7 +4,7 @@
     <router-link class="navbar-btn" to="/">Task Dashboard</router-link>
     <form class="d-flex">
       <button class="btn btn-outline-danger" type="submit" @click="signOut">
-      <router-link class="navbar-btn" to="signOut">Sign Out</router-link>
+        Sign Out
       </button>
     </form>
   </div>

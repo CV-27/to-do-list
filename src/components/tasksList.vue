@@ -9,14 +9,17 @@
           class="form-control"
           type="text"
           :value="task.title"
-          disabled readonly>
+          :disabled = "disabled"
+          :readonly = "readOnly">
           <button
+          @click="useToggleTask(!task.is_complete, task.id)"
           class="btn btn-success"
           type="button"
           aria-describedby="button-addon3">
           Done
           </button>
           <button
+          @click.stop="useEditTask(task.id)"
           class="btn btn-dark"
           type="button">
           Edit
@@ -42,6 +45,13 @@ import userStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
+  data() {
+    return {
+      readOnly: true,
+      disabled: true,
+      newEditedTitle: '',
+    };
+  },
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
@@ -53,9 +63,19 @@ export default {
     ...mapActions(useTasksStore, [
       'fetchTasks',
       'deleteTask',
+      'editTask',
+      'toggleTask',
     ]),
     useDeleteTask(id) {
       this.deleteTask(id);
+    },
+    // useEditTask() {
+    //   this.readOnly = !this.readOnly;
+    //   this.disabled = !this.disabled;
+    //   this.newEditedTitle = this.editTask(this.newEditedTitle);
+    // },
+    useToggleTask(isComplete, id) {
+      this.toggleTask(isComplete, id);
     },
   },
   mounted() {
