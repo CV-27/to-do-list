@@ -6,6 +6,7 @@
       <label for="task" class="input-group d-flex">
         <div class="input-group m-1" v-for="task in tasks" :key="task.id">
           <input
+          :class="[task.is_complete ? 'toggledTask' : '']"
           class="form-control"
           type="text"
           :value="task.title"
@@ -83,3 +84,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.toggledTask {
+  text-decoration: line-through;
+  background-color: rgb(183, 194, 184);
+  transition: background-color 1s, transform 1s;
+  color:green;
+}
+</style>

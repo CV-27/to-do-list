@@ -1,7 +1,11 @@
 <template>
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <router-link class="navbar-btn" to="/">Task Dashboard</router-link>
+    <router-link class="navbar-btn p-2" to="/">
+      <h4>
+        Task Dashboard
+      </h4>
+    </router-link>
     <form class="d-flex">
       <button class="btn btn-outline-danger" type="submit" @click="signOut">
         Sign Out
