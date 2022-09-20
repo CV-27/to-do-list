@@ -4,22 +4,21 @@
       <h4 class="card-header">Tasks</h4>
       <div class="card-body">
       <label for="task" class="input-group d-flex">
-        <div class="input-group m-1" v-for="task in tasks" :key="task.id">
+        <div class="input-group mb-2" v-for="task in tasks" :key="task.id">
           <input
+          @change="useEditTask(task.title, task.id)"
+          :class="[task.is_complete ? 'toggledTask' : '']"
           class="form-control"
           type="text"
-          :value="task.title"
-          disabled readonly>
+          v-model="task.title"
+          :disabled = "disabled"
+          :readonly = "readOnly">
           <button
+          @click="useToggleTask(!task.is_complete, task.id)"
           class="btn btn-success"
           type="button"
           aria-describedby="button-addon3">
           Done
-          </button>
-          <button
-          class="btn btn-dark"
-          type="button">
-          Edit
           </button>
           <button
           @click.prevent="useDeleteTask(task.id)"
@@ -29,6 +28,12 @@
           </button>
         </div>
       </label>
+      <button
+      @click="activateEditTask"
+      class="btn btn-outline-secondary px-3 m-1 float-end"
+      type="button">
+        Edit Tasks
+      </button>
       </div>
     </div>
   </section>
@@ -42,6 +47,12 @@ import userStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
+  data() {
+    return {
+      readOnly: true,
+      disabled: true,
+    };
+  },
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
@@ -53,9 +64,21 @@ export default {
     ...mapActions(useTasksStore, [
       'fetchTasks',
       'deleteTask',
+      'editTask',
+      'toggleTask',
     ]),
     useDeleteTask(id) {
       this.deleteTask(id);
+    },
+    activateEditTask() {
+      this.readOnly = !this.readOnly;
+      this.disabled = !this.disabled;
+    },
+    useEditTask(title, id) {
+      this.editTask(title, id);
+    },
+    useToggleTask(isComplete, id) {
+      this.toggleTask(isComplete, id);
     },
   },
   mounted() {
@@ -63,3 +86,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.toggledTask {
+  text-decoration: line-through;
+  background-color: rgb(183, 194, 184);
+  transition: background-color 1s, transform 1s;
+  color:green;
+}
+</style>

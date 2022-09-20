@@ -27,6 +27,7 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
         ]);
       if (error) {
         console.log(error.message);
+        throw error;
       }
       if (tasks.length) {
         this.tasks.push(tasks[0]);
@@ -34,14 +35,15 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
     },
 
     async editTask(title, id) {
-      const { data: tasks, error } = await supabase.from('tasks').update({
+      const { error } = await supabase.from('tasks').update({
         title,
       }).match({
         id,
       });
-      this.tasks = tasks;
+      console.log(title);
       if (error) {
         console.log(error.message);
+        throw error;
       }
     },
 
@@ -51,20 +53,24 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       });
       if (error) {
         console.log(error.message);
+        throw error;
       }
-      const taskIndex = id;
-      this.tasks.splice(taskIndex, 1);
+      this.tasks = this.tasks.filter((task) => task.id !== id);
     },
 
     async toggleTask(isComplete, id) {
-      const { data: tasks, error } = await supabase.from('tasks').update({
-        isComplete,
+      const { error } = await supabase.from('tasks').update({
+        is_complete: isComplete,
       }).match({
         id,
       });
-      this.tasks = tasks;
       if (error) {
         console.log(error.message);
+        throw error;
+      }
+      const taskToComplete = this.tasks.find((item) => item.id === id);
+      if (taskToComplete) {
+        taskToComplete.is_complete = !taskToComplete.is_complete;
       }
     },
   },
