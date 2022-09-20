@@ -2,10 +2,13 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <router-link class="navbar-btn p-2" to="/">
-      <h4>
-        Task Dashboard
-      </h4>
+      <div class="d-flex align-content-md-between">
+        <img src="../assets/ICON_Ared.svg" alt="logo" class="logo">
+      </div>
     </router-link>
+    <h4>
+      Task Dashboard
+    </h4>
     <form class="d-flex">
       <button class="btn btn-outline-danger" type="submit" @click="signOut">
         Sign Out
@@ -43,4 +46,7 @@ export default {
   color: black;
 }
 
+.logo {
+  width: 25px;
+}
 </style>

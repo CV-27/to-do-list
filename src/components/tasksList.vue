@@ -5,15 +5,12 @@
       <div class="card-body">
       <label for="task" class="input-group d-flex">
         <div class="input-group mb-2" v-for="task in tasks" :key="task.id">
-          <!-- <input
-          class="form-check-input m-2 "
-          type="checkbox" value=""
-          aria-label="Checkbox for following text input"> -->
           <input
+          @change="useEditTask(task.title, task.id)"
           :class="[task.is_complete ? 'toggledTask' : '']"
           class="form-control"
           type="text"
-          :value="task.title"
+          v-model="task.title"
           :disabled = "disabled"
           :readonly = "readOnly">
           <button
@@ -23,12 +20,6 @@
           aria-describedby="button-addon3">
           Done
           </button>
-          <!-- <button
-          @click.stop="useEditTask(task.title, task.id)"
-          class="btn btn-dark"
-          type="button">
-          Edit
-          </button> -->
           <button
           @click.prevent="useDeleteTask(task.id)"
           class="btn btn-danger"
@@ -38,11 +29,11 @@
         </div>
       </label>
       <button
-          @click.stop="useEditTask(tasks.title, tasks.id)"
-          class="btn btn-outline-secondary px-3 m-1 float-end"
-          type="button">
-          Edit Tasks
-        </button>
+      @click="activateEditTask"
+      class="btn btn-outline-secondary px-3 m-1 float-end"
+      type="button">
+        Edit Tasks
+      </button>
       </div>
     </div>
   </section>
@@ -60,7 +51,6 @@ export default {
     return {
       readOnly: true,
       disabled: true,
-      newEditedTitle: '',
     };
   },
   computed: {
@@ -80,10 +70,11 @@ export default {
     useDeleteTask(id) {
       this.deleteTask(id);
     },
-    useEditTask(title, id) {
+    activateEditTask() {
       this.readOnly = !this.readOnly;
       this.disabled = !this.disabled;
-      this.newEditedTitle = title;
+    },
+    useEditTask(title, id) {
       this.editTask(title, id);
     },
     useToggleTask(isComplete, id) {

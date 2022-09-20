@@ -3,11 +3,12 @@
     <div class="card shadow-lg m-auto">
       <h4 class="card-header">Register</h4>
       <div class="card-body d-flex align-items-md-center">
-        <form @submit.prevent="signUp">
+        <form @submit="useSignUp">
           <div class="form-group py-2" >
             <label for="email"> Email Address
               <div class="input-group flex-nowrap">
                 <input
+                autocomplete="email"
                 class="form-control"
                 type="email"
                 placeholder="email@domain.com"
@@ -20,6 +21,7 @@
           <div class="form-group py-2">
             <label for="password"> Password
               <input
+              autocomplete="current-password"
               class="form-control"
               :type="inputType"
               required
@@ -30,12 +32,13 @@
           <div class="form-group py-2 d-flex">
             <label for="passwordCheck"> Password check
               <input
+              autocomplete="current-password"
               class="form-control"
               :type="inputType"
               v-model="password"
               required
               placeholder="**********"
-              id="password" />
+              id="password-check" />
               </label>
           </div>
         <button
@@ -70,7 +73,7 @@ export default {
     };
   },
   methods: {
-    async signUp() { // function to SignUp user to supaBase
+    async useSignUp() { // function to SignUp user to supaBase
       if (this.password === this.passwordCheck) {
         try {
           await defineStore().signUp(this.email, this.password);

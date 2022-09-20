@@ -8,6 +8,7 @@
             <label for="email" class="d-flex">
             <div class="input-group flex-nowrap">
               <input
+              autocomplete="email"
               class="form-control"
               type="email"
               placeholder="mail@domain.com"
@@ -22,6 +23,7 @@
             <label for="password" class="d-flex">
             <div class="input-group flex-nowrap">
               <input
+              autocomplete="current-password"
               class="form-control"
               :type="inputType"
               v-model="password"
