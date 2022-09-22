@@ -22,13 +22,13 @@
               id="basic-addon1">@</span>
             </div>
             </label>
-            <div v-if="errorMessage"> {{ errorMessage }}</div>
+            <div class="font-monospace text-danger" v-if="errorMessage"> {{ errorMessage }}</div>
             </div>
         <button
         class="btn btn-primary my-2"
         type="submit">Recover pass
         </button>
-        <a href="login" class="px-4">Cancel</a>
+        <router-link class="btn btn-link" to="login">Cancel</router-link>
         </form>
       </div>
     </div>

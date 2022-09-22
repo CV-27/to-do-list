@@ -40,10 +40,11 @@
             </div>
             </label>
           </div>
-          <div v-if="errorMessage"> {{ errorMessage }}</div>
+          <div v-if="errorMessage"
+          class="font-monospace text-danger"> {{ errorMessage }}</div>
         <button class="btn btn-primary my-2" type="submit">Login</button>
         <router-link to="register" class="btn btn-info mx-2">Register</router-link>
-        <router-link to="recovery" class="btn btn-info mx-2">Forgot your password?</router-link>
+        <router-link to="recovery" class="btn btn-link">Forgot your password?</router-link>
         </form>
       </div>
     </div>

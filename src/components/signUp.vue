@@ -44,7 +44,7 @@
               id="password-check" />
               </label>
           </div>
-          <div v-if="errorMessage"> {{ errorMessage }}</div>
+          <div v-if="errorMessage" class="font-monospace text-danger"> {{ errorMessage }}</div>
         <button
         class="btn btn-primary my-2"
         type="submit">
@@ -56,7 +56,7 @@
         type="button" id="button-addon2">
         {{ btnText }}
         </button>
-        <a href="login">Cancel</a>
+        <router-link class="btn btn-link" to="login">Cancel</router-link>
         </form>
       </div>
     </div>
@@ -70,12 +70,12 @@ import { mapActions, mapState } from 'pinia';
 export default {
   data() {
     return {
-      email: '', // Input Fields
-      password: '', // Input Fields
-      passwordCheck: '', // check if the pass double validation
-      errorMessage: null, // Error Message
+      email: '',
+      password: '',
+      passwordCheck: '',
+      errorMessage: null,
       inputType: 'password',
-      btnText: 'Show Password', // trigger password visibility
+      btnText: 'Show Password',
     };
   },
   computed: {
@@ -91,7 +91,7 @@ export default {
       try {
         await this.signUp(this.email, this.password);
         this.errorMessage = 'Thank you for suscripcion, you will be redirected to the login page';
-        setTimeout(() => { // hides error message
+        setTimeout(() => {
           this.$router.push({ path: '/auth/login' });
         }, 3000);
       } catch (error) {

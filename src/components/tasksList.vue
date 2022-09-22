@@ -1,35 +1,48 @@
 <template>
  <section>
-    <div class="card m-3">
-      <h4 class="card-header">Tasks</h4>
+    <div class="card m-3 d-flex">
+      <h2 class="card-header">Tasks
+        <span v-if="tasks.length"
+        class="badge bg-primary float-end"
+        :showNmbTasks="showNmbTasks()"
+        :showCompleteTasks="showCompleteTasks()">
+        {{ completedTasks }} of {{ nmbTasks }} completed
+        </span>
+      </h2>
       <div class="card-body">
-      <label for="task" class="input-group d-flex">
-        <div class="input-group mb-2" v-for="task in tasks" :key="task.id">
-          <input
-          @change="useEditTask(task.title, task.id)"
-          :class="[task.is_complete ? 'toggledTask' : '']"
-          class="form-control"
-          type="text"
-          v-model="task.title"
-          :disabled = "disabled"
-          :readonly = "readOnly">
-          <button
-          @click="useToggleTask(!task.is_complete, task.id)"
-          class="btn btn-success"
-          type="button"
-          aria-describedby="button-addon3">
-          Done
-          </button>
-          <button
-          @click.prevent="useDeleteTask(task.id)"
-          class="btn btn-danger"
-          type="button">
-          Delete
-          </button>
-        </div>
+        <label for="task" class="input-group d-grid">
+        <p
+        class="alert alert-primary "
+        role="alert"
+        v-if="!tasks.length"> Enter a new task to begin
+        </p>
+          <div class="input-group mb-2" v-for="task in tasks" :key="task.id">
+            <input
+            @change="useEditTask(task.title, task.id)"
+            :class="[task.is_complete ? 'toggledTask' : '']"
+            class="form-control"
+            type="text"
+            v-model="task.title"
+            :disabled = "disabled"
+            :readonly = "readOnly">
+            <button
+            @click="useToggleTask(!task.is_complete, task.id)"
+            class="btn btn-success"
+            type="button"
+            aria-describedby="button-addon3">
+            Done
+            </button>
+            <button
+            @click.prevent="useDeleteTask(task.id)"
+            class="btn btn-danger"
+            type="button">
+            Delete
+            </button>
+          </div>
       </label>
       <button
       @click="activateEditTask"
+      :class="[!tasks.length ? 'hideBtn' : '']"
       class="btn btn-outline-secondary px-3 m-1 float-end"
       type="button">
         Edit Tasks
@@ -51,6 +64,8 @@ export default {
     return {
       readOnly: true,
       disabled: true,
+      nmbTasks: 0,
+      completedTasks: 0,
     };
   },
   computed: {
@@ -80,6 +95,13 @@ export default {
     useToggleTask(isComplete, id) {
       this.toggleTask(isComplete, id);
     },
+    showNmbTasks() {
+      this.nmbTasks = this.tasks.length;
+    },
+    showCompleteTasks() {
+      const completed = this.tasks.filter((item) => item.is_complete);
+      this.completedTasks = completed.length;
+    },
   },
   mounted() {
     this.fetchTasks(this.tasks);
@@ -92,5 +114,8 @@ export default {
   background-color: rgb(183, 194, 184);
   transition: background-color 1s, transform 1s;
   color:green;
+}
+.hideBtn {
+  display: none;
 }
 </style>
