@@ -3,7 +3,7 @@ import supabase from '@/supabase/index';
 
 export default defineStore('user', {
   state: () => ({
-    user: null,
+    user: {},
   }),
 
   actions: {
@@ -15,6 +15,7 @@ export default defineStore('user', {
       const { user, error } = await supabase.auth.signUp({
         email,
         password,
+        shouldCreateUser: true,
       });
       if (error) throw error;
       if (user) this.user = user;
@@ -33,6 +34,11 @@ export default defineStore('user', {
     },
     async signOut() {
       const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+    },
+
+    async recoverPass(email) {
+      const { error } = await supabase.auth.api.resetPasswordForEmail(email);
       if (error) throw error;
     },
   },

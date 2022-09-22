@@ -43,7 +43,7 @@
 
 import { mapActions, mapState } from 'pinia';
 import useTasksStore from '@/store/modules/task';
-import userStore from '@/store/modules/user';
+import defineStore from '@/store/modules/user';
 
 export default {
   name: 'taskList',
@@ -56,7 +56,7 @@ export default {
   computed: {
     ...mapState(useTasksStore, [
       'tasks']),
-    ...mapState(userStore, [
+    ...mapState(defineStore, [
       'user',
     ]),
   },

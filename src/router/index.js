@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import AuthView from '../views/AuthView.vue';
 import SignIn from '../components/signIn.vue';
 import SignUp from '../components/signUp.vue';
+import RecoverPass from '../components/recoverPass.vue';
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
     children: [
       { path: 'login', component: SignIn },
       { path: 'register', component: SignUp },
+      { path: 'recovery', component: RecoverPass },
     ],
   },
 ];

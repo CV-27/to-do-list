@@ -3,7 +3,9 @@
     <div class="card shadow-lg m-auto">
       <h4 class="card-header">Login</h4>
       <div class="card-body">
-        <form @submit.prevent="signIn">
+        <form
+        @submit.prevent="useSignIn"
+        method="post">
           <div class="form-group">
             <label for="email" class="d-flex">
             <div class="input-group flex-nowrap">
@@ -38,16 +40,10 @@
             </div>
             </label>
           </div>
+          <div v-if="errorMessage"> {{ errorMessage }}</div>
         <button class="btn btn-primary my-2" type="submit">Login</button>
         <router-link to="register" class="btn btn-info mx-2">Register</router-link>
-        <a href="#">Forgot your password? bad luck</a>
-        <!-- <p>Did you have an account?
-          <PersonalRouter :route="route" :buttonText="buttonText" />
-        </p>
-        <a href="#">Forgot your password? bad luck</a>
-          <p>No account?
-            <router-link to="register" class="btn btn-link">Register</router-link>
-          </p> -->
+        <router-link to="recovery" class="btn btn-info mx-2">Forgot your password?</router-link>
         </form>
       </div>
     </div>
@@ -56,18 +52,27 @@
 
 <script>
 import defineStore from '@/store/modules/user';
+import { mapActions, mapState } from 'pinia';
 
 export default {
   data() {
     return {
-      email: '', // Input Fields
-      password: '', // Input Fields
-      errorMessage: '', // Error Message
-      inputType: 'password', // trigger password visibility
+      email: '',
+      password: '',
+      errorMessage: '',
+      inputType: 'password',
       btnText: 'Show',
     };
   },
+  computed: {
+    ...mapState(defineStore, ['user']),
+  },
   methods: {
+    ...mapActions(defineStore, [
+      'signIn',
+      'recoverPass',
+    ]),
+
     showPassword() {
       if (this.inputType === 'password') {
         this.inputType = 'text';
@@ -77,17 +82,19 @@ export default {
         this.btnText = 'Show';
       }
     },
-    async signIn() { // use supabase to send a valid user to the home page
+
+    async useSignIn() {
       try {
-        await defineStore().signIn(this.email, this.password);
+        await this.signIn(this.email, this.password);
         this.$router.push({ path: '/' });
       } catch (error) {
-        this.errorMessage = `${error.message}`;
-        setTimeout(() => { // hides error message
+        this.errorMessage = 'Please check your credentials';
+        setTimeout(() => {
           this.errorMessage = null;
-        }, 5000);
+        }, 3000);
       }
     },
   },
 };
+
 </script>
