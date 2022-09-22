@@ -6,9 +6,9 @@
         <img src="../assets/ICON_Ared.svg" alt="logo" class="logo">
       </div>
     </router-link>
-    <h4>
+    <h3>
       Task Dashboard
-    </h4>
+    </h3>
     <form class="d-flex">
       <button class="btn btn-outline-danger" type="submit" @click="signOut">
         Sign Out
@@ -24,13 +24,13 @@ import defineStore from '@/store/modules/user';
 
 export default {
   methods: {
-    async signOut() { // use supabase to send a valid user to the home page
+    async signOut() {
       try {
         await defineStore().signOut(this.email, this.password);
         this.$router.push({ path: '/auth/login' });
       } catch (error) {
         this.errorMessage = `${error.message}`;
-        setTimeout(() => { // hides error message
+        setTimeout(() => {
           this.errorMessage = null;
         }, 5000);
       }

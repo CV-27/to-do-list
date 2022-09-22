@@ -2,17 +2,17 @@ import { defineStore } from 'pinia';
 import supabase from '@/supabase/index';
 import useUserStore from './user';
 
-export default defineStore('tasks', { // sync tasks from pinia and supabase
+export default defineStore('tasks', {
   state: () => ({
     tasks: [],
   }),
   actions: {
-    async fetchTasks() { // fetch tasks by ID descending order
-      const { data: tasks } = await supabase // get all tasks from supabase
-        .from('tasks') // database name
-        .select('*') // get all
-        .order('id', { ascending: true }); // ID descending order
-      this.tasks = tasks;// save tasks on state parameter
+    async fetchTasks() {
+      const { data: tasks } = await supabase
+        .from('tasks')
+        .select('*')
+        .order('id', { ascending: true });
+      this.tasks = tasks;
       return tasks;
     },
 
@@ -40,7 +40,6 @@ export default defineStore('tasks', { // sync tasks from pinia and supabase
       }).match({
         id,
       });
-      console.log(title);
       if (error) {
         console.log(error.message);
         throw error;
