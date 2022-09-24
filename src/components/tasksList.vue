@@ -3,7 +3,7 @@
     <div class="card m-3 d-flex">
       <h2 class="card-header">Tasks
         <span v-if="tasks.length"
-        class="badge bg-primary float-end"
+        class="badge bg-warning font-monospace text-dark float-end"
         :showNmbTasks="showNmbTasks()"
         :showCompleteTasks="showCompleteTasks()">
         {{ completedTasks }} of {{ nmbTasks }} completed
@@ -35,7 +35,8 @@
             <button
             @click.prevent="useDeleteTask(task.id)"
             class="btn btn-danger"
-            type="button">
+            type="button"
+            >
             Delete
             </button>
           </div>
@@ -44,9 +45,7 @@
       @click="activateEditTask"
       :class="[!tasks.length ? 'hideBtn' : '']"
       class="btn btn-outline-secondary px-3 m-1 float-end"
-      type="button">
-        Edit Tasks
-      </button>
+      type="button"> {{ editBtn }} </button>
       </div>
     </div>
   </section>
@@ -66,6 +65,7 @@ export default {
       disabled: true,
       nmbTasks: 0,
       completedTasks: 0,
+      editBtn: 'Edit tasks',
     };
   },
   computed: {
@@ -88,6 +88,11 @@ export default {
     activateEditTask() {
       this.readOnly = !this.readOnly;
       this.disabled = !this.disabled;
+      if (this.readOnly) {
+        this.editBtn = 'Edit tasks';
+      } else {
+        this.editBtn = 'Summit';
+      }
     },
     useEditTask(title, id) {
       this.editTask(title, id);

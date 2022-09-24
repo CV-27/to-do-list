@@ -90,12 +90,12 @@ export default {
       }
       try {
         await this.signUp(this.email, this.password);
-        this.errorMessage = 'Thank you for suscripcion, you will be redirected to the login page';
+        this.errorMessage = 'Thank you for the subscription, you will be redirected to the login page';
         setTimeout(() => {
           this.$router.push({ path: '/auth/login' });
         }, 3000);
       } catch (error) {
-        this.errorMessage = 'If you have already an account please log in';
+        this.errorMessage = 'This email already has an account';
         setTimeout(() => {
           this.errorMessage = null;
         }, 3000);
