@@ -17,3 +17,8 @@
     max-width: 700px;
     margin: 0 auto;
 }
+
+.text-danger, .text-dark {
+    font-size: 12px;
+    padding: 10px;
+}

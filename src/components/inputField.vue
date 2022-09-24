@@ -1,6 +1,6 @@
 <template>
  <section>
-    <div class="card m-3">
+    <div class="card m-3 bg-light bg-gradient">
       <div class="card-body">
         <label for="task" class="input-group d-flex">
           <div class="input-group">
@@ -20,6 +20,7 @@
             </button>
           </div>
         </label>
+        <div v-if="errorMessage" class="font-monospace text-danger"> {{ errorMessage }} </div>
       </div>
     </div>
   </section>
@@ -36,6 +37,7 @@ export default {
   data() {
     return {
       newTitle: '',
+      errorMessage: null,
     };
   },
   computed: {
@@ -49,6 +51,12 @@ export default {
     ]),
     addNewTask() {
       this.addTask(this.newTitle);
+      if (this.newTitle.length < 4) {
+        this.errorMessage = 'Tasks should be more than 3 characters long';
+        setTimeout(() => {
+          this.errorMessage = null;
+        }, 3000);
+      }
       this.newTitle = '';
     },
   },
