@@ -1,14 +1,17 @@
-# A simple task manager made in Vue3
-- this project was created within an IronHack bootcamp challenge with the goal to learn and improve skills in Vue 3  framework (Options-Api).
+# A simple task manager made in Vue
+- this project was created within an IronHack bootcamp challenge with the goal to learn and improve skills in Vue   framework (Options-Api).
 
 ## Dependencies:
-- Pinia
-- Pinia persist
-- Supabase
-- Bootstrap
+- Pinia 2.0.21
+- Pinia persist 1.0.0
+- Supabase 1.35.6 
+- Bootstrap 5.2.0
+- Vue 4.0.3
 - Vue-CLI
+- Vue-router 4.0.3
 
 ## Project premises
+
 ### Authentication
 - Create an account
 - Log in to the app
