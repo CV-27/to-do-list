@@ -1,4 +1,5 @@
 # A simple task manager made in Vue3
+- this project was created within an IronHack bootcamp challenge with the goal to learn and improve skills in Vue 3  framework (Options-Api).
 
 ## Dependencies:
 - Pinia
@@ -22,22 +23,20 @@
 
 ## Licences
 This app is free to steal, use, edit, share or change as you like. No copywright needed.
+Please use your own supabase credentials, edit them at - src/supabase/index.js
 
 ## Project setup
 ```
 npm install
 ```
-
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
 ### Lints and fixes files
 ```
 npm run lint
