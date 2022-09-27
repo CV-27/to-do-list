@@ -1,5 +1,5 @@
 # A simple task manager made in Vue
-- this project was created within an IronHack bootcamp challenge with the goal to learn and improve skills in Vue   framework (Options-Api).
+- This project was created within an IronHack bootcamp challenge with the goal to learn and improve skills in Vue   framework (Options-Api).
 
 ## Dependencies:
 - Pinia 2.0.21
