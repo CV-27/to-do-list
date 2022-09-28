@@ -10,6 +10,10 @@
 - Vue-CLI
 - Vue-router 4.0.3
 
+
+![Screenshot](https://user-images.githubusercontent.com/90564918/192855905-cf01b28f-18bd-46b5-ab6b-d833bf1964a6.png)
+
+
 ## Project premises
 
 ### Authentication
